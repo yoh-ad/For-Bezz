@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine’s Day Bezzz 🖤</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  body { margin: 0; font-family: 'Playfair Display', serif; background: #000; color: white; overflow-x: hidden; }
+
+  body::before {
+    content: ""; position: fixed; width: 200%; height: 200%; top: -50%; left: -50%;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.15), transparent 70%);
+    animation: pulse 6s infinite alternate; z-index: 1; pointer-events: none; 
+  }
+  @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+  .particle { position: fixed; pointer-events: none; width: 6px; height: 6px; background: #ff1a1a; box-shadow: 0 0 12px #ff0000; border-radius: 50%; z-index: 100; }
+
+  /* Heart Shape for Explosion */
+  .heart-pop {
+    position: fixed; width: 20px; height: 20px; background: #ff1a1a; transform: rotate(45deg); z-index: 1000; pointer-events: none;
+  }
+  .heart-pop::before, .heart-pop::after {
+    content: ""; position: absolute; width: 20px; height: 20px; background: #ff1a1a; border-radius: 50%;
+  }
+  .heart-pop::before { top: -10px; left: 0; }
+  .heart-pop::after { left: -10px; top: 0; }
+
+  section { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; transition: opacity 0.8s ease; }
+
+  h1, h2 { color: #ff1a1a; text-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+
+  button { position: relative; z-index: 20; padding: 15px 35px; margin: 10px; border-radius: 50px; border: 2px solid #ff1a1a; background: rgba(0,0,0,0.6); color: white; font-family: 'Playfair Display', serif; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+  button:hover { background: #ff1a1a; box-shadow: 0 0 30px red; transform: scale(1.05); }
+
+  .locked { display: none !important; }
+
+  #secretInput { position: relative; z-index: 30; background: #1a0000; border: 2px solid #ff1a1a; color: white; padding: 15px; border-radius: 10px; text-align: center; font-size: 1.2rem; width: 260px; margin: 20px auto; display: block; outline: none; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
+
+  .progress-container { width: 80%; max-width: 400px; height: 8px; background: #222; border-radius: 20px; margin-bottom: 30px; }
+  .progress-bar { height: 100%; width: 0%; background: #ff0000; box-shadow: 0 0 10px red; transition: width 0.5s ease; border-radius: 20px; }
+
+  .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 900px; margin-bottom: 30px; }
+  .gallery img { width: 160px; height: 160px; object-fit: cover; border-radius: 15px; border: 1px solid #ff1a1a; transition: 0.3s; }
+
+  #loveLetter { font-size: 1.9rem; line-height: 1.8; max-width: 850px; color: #eee; text-align: center; opacity: 0; }
+  .highlight { color: #ff1a1a; font-style: italic; font-weight: 700; text-shadow: 0 0 15px #ff0000; }
+  
+  .spotlight { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, black 85%); z-index: 5; pointer-events: none; opacity: 0; transition: 3s; }
+  .spotlight.active { opacity: 1; }
+
+  .fadeInText { animation: fadeIn 3s forwards; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="spotlight" id="spotlight"></div>
+
+<audio id="bgMusic" loop>
+  <source src="13. Dawit Tsige - Wude Wude.mp3" type="audio/mpeg">
+</audio>
+
+<section id="intro">
+  <h1 style="font-size: 4rem; margin: 0;">🖤</h1>
+  <h2 style="font-weight: 400; font-style: italic;">Some hearts are not opened…</h2>
+  <h2 style="margin-top: 0;">They are unlocked.</h2>
+  <button onclick="enterExperience()">Start Unlocking My Heart</button>
+</section>
+
+<section id="quizSection" class="locked">
+  <h1>Unlock My Heart 💖</h1>
+  <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+  <div id="quizContainer"></div>
+</section>
+
+<section id="memories" class="locked">
+  <h1>Our Memories Yene Fikir 🥰</h1>
+  <div class="gallery">
+    <img src="photo_2026-02-12_16-45-30.jpg"><img src="photo_2026-02-12_16-43-14.jpg"><img src="photo_2026-02-06_20-38-34.jpg">
+    <img src="photo_2026-02-12_11-38-42.jpg"><img src="photo_2026-02-12_11-41-41.jpg"><img src="photo_2026-02-12_16-42-36.jpg">
+    <img src="9.jpg"><img src="11.jpg"><img src="15.jpg">
+    <img src="17.jpg"><img src="18.jpg"><img src="19.jpg">
+    <img src="20.jpg"><img src="21.jpg"><img src="22.jpg">
+    <img src="23.jpg"><img src="24.jpg"><img src="25.jpg">
+    <img src="26.jpg"><img src="5.jpg"><img src="0.jpg">
+    <img src="kk.jpg"><img src="wanaw.jpg">
+    <img src="photo_2026-02-12_16-42-37.jpg"><img src="photo_2026-01-24_18-31-28.jpg">
+  </div>
+  <h2 style="margin-top:20px; font-size: 1.4rem;">What is the name you call me that I like the most? 🔐</h2>
+  <input type="text" id="secretInput" placeholder="Enter secret name...">
+  <button onclick="checkPassword()">Unlock ❤️</button>
+</section>
+
+<section id="love" class="locked">
+  <div id="loveLetter"></div>
+  <div id="finalBtnContainer" style="opacity:0; transition: 3s; margin-top: 40px;">
+     <button id="endingBtn" onclick="handleFinalClick()">This Is Just The Beginning 🔥</button>
+  </div>
+</section>
+
+<script>
+let current = 0;
+const quizData = [
+  { q: "Where did we first meet?", a: "KK", options: ["In class", "KK", "In the library"] },
+  { q: "Who do I call you?", a: "Bezzz", options: ["Bezawit", "Beza", "Bezzz"] },
+  { q: "When did i text you first?", a: "December 5", options: ["December 5", "December 2", "December 10"] },
+  { q: "When did I asked you to be my girlfriend?", a: "December 18", options: ["December 10", "October 18", "December 18"] },
+  { q: "Who introduced us?", a: "Beza Girma", options: ["Beza Girma", "John Daniel", "nobody"] }
+];
+
+// --- MOUSE TRAIL ---
+function createParticle(x, y) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  document.body.appendChild(p);
+  p.style.left = (x - 3) + 'px'; p.style.top = (y - 3) + 'px';
+  p.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: `translate(${(Math.random()-0.5)*40}px, ${(Math.random()-0.5)*40}px) scale(0)`, opacity: 0 }], { duration: 800 }).onfinish = () => p.remove();
+}
+document.addEventListener('mousemove', (e) => createParticle(e.clientX, e.clientY));
+document.addEventListener('touchmove', (e) => createParticle(e.touches[0].clientX, e.touches[0].clientY));
+
+// --- NAVIGATION ---
+function transition(outId, inId) {
+  const outSec = document.getElementById(outId);
+  const inSec = document.getElementById(inId);
+  outSec.style.opacity = "0";
+  setTimeout(() => {
+    outSec.classList.add("locked");
+    inSec.classList.remove("locked");
+    inSec.style.opacity = "0";
+    setTimeout(() => { inSec.style.opacity = "1"; }, 50);
+  }, 800);
+}
+
+function enterExperience() {
+  document.getElementById("bgMusic").play().catch(e => console.log("Audio waiting..."));
+  transition("intro", "quizSection");
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const data = quizData[current];
+  document.getElementById("quizContainer").innerHTML = `
+    <h2 style="margin-bottom: 25px;">${data.q}</h2>
+    ${data.options.map(opt => `<button onclick="handleQuiz('${opt}')">${opt}</button>`).join('')}
+  `;
+}
+
+function handleQuiz(choice) {
+  if(choice === quizData[current].a) {
+    current++;
+    document.getElementById("progressBar").style.width = (current/quizData.length * 100) + "%";
+    if(current < quizData.length) loadQuestion();
+    else transition("quizSection", "memories");
+  } else { alert("Try again, Bezzz! 😘"); }
+}
+
+function checkPassword() {
+  if(document.getElementById("secretInput").value.toLowerCase().trim() === "joye") {
+    transition("memories", "love");
+    showLetter();
+  } else { alert("Incorrect name... look deep into your heart! 🖤"); }
+}
+
+// --- TYPEWRITER LETTER ---
+function showLetter() {
+  const letter = document.getElementById("loveLetter");
+  const rawText = "They say time is the measure of love, but we proved them wrong. In just one week, we basically were in |Relationship|. You didn’t just enter my life—you became the |center| of it. I know it’s been fast, |Bezzz|, but don't ever |fear| the speed. My heart isn't rushing; it has simply |arrived|. Every day, I am teaching myself how to |LOVE| you even more than I did the day before. I am your |anchor|. I am your |safe place|. You can |trust| me with all your heart. |Always yours, Yohad.| ❤️";
+  
+  let i = 0;
+  letter.style.opacity = "1";
+  let isHighlighting = false;
+
+  function type() {
+    if (i < rawText.length) {
+      let char = rawText.charAt(i);
+      if (char === "|") {
+        isHighlighting = !isHighlighting;
+        i++;
+        type();
+        return;
+      }
+      let content = isHighlighting ? `<span class="highlight">${char}</span>` : char;
+      if (char === ".") content += "<br><br>";
+      letter.innerHTML += content;
+      i++;
+      setTimeout(type, 45); 
+    } else {
+      setTimeout(() => {
+        document.getElementById("spotlight").classList.add("active");
+        document.getElementById("finalBtnContainer").style.opacity = "1";
+      }, 1000);
+    }
+  }
+  type();
+}
+
+// --- FINAL EXPLOSION & MESSAGE ---
+function handleFinalClick() {
+  // Massive Explosion
+  for (let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const h = document.createElement("div");
+      h.className = "heart-pop";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.top = Math.random() * 100 + "vh";
+      const scale = Math.random() * 2 + 1;
+      h.animate([
+        { transform: `rotate(45deg) scale(0)`, opacity: 1 },
+        { transform: `rotate(45deg) scale(${scale}) translateY(-100px)`, opacity: 0 }
+      ], { duration: 2500, easing: 'ease-out' }).onfinish = () => h.remove();
+      document.body.appendChild(h);
+    }, i * 25);
+  }
+
+  // Swap Button for Final Text
+  document.getElementById("finalBtnContainer").style.opacity = "0";
+  setTimeout(() => {
+    document.getElementById("finalBtnContainer").innerHTML = `
+      <h2 class="fadeInText" style="font-size: 2.2rem; color: white;">
+        I can't wait to see you on Tuesday, Bezzz. ❤️
+      </h2>`;
+    document.getElementById("finalBtnContainer").style.opacity = "1";
+  }, 1000);
+}
+</script>
+</body>
+</html>
